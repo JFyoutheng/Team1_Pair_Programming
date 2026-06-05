@@ -1,10 +1,12 @@
-﻿using System.Text;
+﻿using NLog;
+using System.Text;
 using System.Text.Json;
 
 namespace Team1_Pair_Program;
 
 public class Program
 {
+    private static readonly Logger logger = NLog.LogManager.GetCurrentClassLogger();
     private static readonly List<Product> products =
         [
             new() { ProductName = "ノートPC", ProductPrice = 1500 },
@@ -196,29 +198,28 @@ public class Program
                         };
                         string json = JsonSerializer.Serialize(orderData);
                         var content = new StringContent(json, Encoding.UTF8, "application/json");
+                        logger.Info("サーバーへデータをPOST送信中...");
                         try
                         {
                             var response = await httpClient.PostAsync("http://localhost:8080/", content);
                             if (response.IsSuccessStatusCode)
                             {
-                                // 返ってきたJSONデータを読み取って画面に表示
                                 string responseBody = await response.Content.ReadAsStringAsync();
-                                Console.WriteLine("\n 【通信成功！】サーバーからのレスポンス:");
-                                Console.WriteLine(responseBody);
+                                logger.Info($"通信成功: サーバーからのレスポンス:{responseBody}");
                             }
                             else
                             {
-                                Console.WriteLine($"\n サーバーがエラーを返しました: {(int)response.StatusCode} {response.StatusCode}");
+                                logger.Error($"サーバーがエラーを返しました: {(int)response.StatusCode} {response.StatusCode}");
                             }
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine($"[送信エラー] {item.ProductName} の送信に失敗: {ex.Message}");
+                            logger.Error($"送信エラー: {item.ProductName} の送信に失敗: {ex.Message}");
                         }
                     }
                     cart.Clear();
 
-                    Console.WriteLine("購入を確定し、売上データをPOST送信しました。");
+                    logger.Info("売上データをPOST送信しました。");
                     Console.WriteLine("--------------------------------------------");
                     Console.WriteLine("何かキーを押すとメインメニューに戻ります。");
                     Console.ReadKey(true);
