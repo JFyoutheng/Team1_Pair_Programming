@@ -75,7 +75,7 @@ public class Program
                 //    Console.WriteLine($" 商品名: {order.ProductName}");
                 //    Console.WriteLine($" 個数: {order.ProductQuantity}");
                 //    Console.WriteLine($"日付: {order.PurchaseDate:yyyy/MM/ddHH:mm:ss}");
-                //    Console.WriteLine($"合計金額: {order.TotalAmount:N0}円");
+                //    Console.WriteLine($"合計金額: {order.TotalCost:N0}円");
                 //    Console.WriteLine("--------------------------------------------");
                 //}
 
@@ -124,7 +124,6 @@ public class Program
                     Console.WriteLine("--------------------------------------------");
                     Console.WriteLine($" 商品名 : {selectedProduct.ProductName}");
                     Console.WriteLine($" 数量   : {selectedQuantity} 個");
-                    Console.WriteLine($" 合計金額: {selectedProduct.ProductPrice * selectedQuantity:N0} 円");
                     Console.WriteLine("--------------------------------------------");
                     Console.WriteLine("上記の内容を追加しますか？\n");
 
@@ -186,11 +185,12 @@ public class Program
 
                     foreach (var item in cart)
                     {
+                        item.TotalCost = item.ProductPrice * item.ProductQuantity;
                         // 送信用データモデルの作成
                         var orderData = new
                         {
                             ProductName = item.ProductName,
-                            TotalCost = item.ProductPrice * item.ProductQuantity,
+                            TotalCost = item.TotalCost,
                             Quantity = item.ProductQuantity,
                             PurchaseDate = item.PurchaseDate
                         };
