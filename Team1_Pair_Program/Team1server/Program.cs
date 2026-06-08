@@ -11,7 +11,7 @@
     class Program
     {
         private static readonly Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             List<Products> salesList = new List<Products>();
 
@@ -64,7 +64,7 @@
                                 Console.WriteLine($"【変換成功】");
                                 Console.WriteLine($"商品名: {data.ProductName}");
                                 Console.WriteLine($"数量: {data.ProductQuantity}");
-                                Console.WriteLine($"金額: {data.TotalCost}"); // 「年齢」から「金額」に修正しました
+                                Console.WriteLine($"金額: {data.TotalCost}"); 
                             }
                         }
                         catch (JsonException)
@@ -89,8 +89,12 @@
                     else if (request.HttpMethod == "GET")
                     {
                         // 💡 GETリクエストが来た場合の処理（必要であればここに書く）
-                        string jsonResponse = "{\"message\": \"GETリクエストを受け付けました。\"}";
-                        byte[] buffer = Encoding.UTF8.GetBytes(jsonResponse);
+                        Console.WriteLine("GETリクエストを受信しました");
+                        string JsonSalesList = JsonSerializer.Serialize(salesList);
+                        byte[] buffer = Encoding.UTF8.GetBytes(JsonSalesList);
+                        response.ContentType = "application/json";
+                        response.ContentLength64 = buffer.Length;
+                        await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
                         response.StatusCode = (int)HttpStatusCode.OK;
                         response.OutputStream.Write(buffer, 0, buffer.Length);
                     }
@@ -106,8 +110,6 @@
                 }
                 finally
                 {
-                    // 💡 【超重要】どんなリクエスト（POST, GET, エラー）であっても、
-                    // 最後に必ず「この通信(response)」だけを確実に閉じる！
                     response.Close();
                 }
             }
@@ -116,7 +118,7 @@
         public class Products
         {
             public string ProductName { get; set; } = "";
-            public string ProductQuantity { get; set; } = "";
+            public int ProductQuantity { get; set; }
             public int TotalCost { get; set; }
             public DateTime PurchaseDate { get; set; }
         }
