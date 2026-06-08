@@ -1,0 +1,24 @@
+2026-06-08 10:10:59.9577 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:10:59.9668 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:11:00.0135 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:12:50.0249 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:12:50.0343 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:12:50.0881 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:25:05.5587 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:25:05.5719 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:25:05.6531 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:26:35.3921 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:26:35.3921 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:26:35.4448 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:28:55.1112 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:28:55.1112 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:28:55.1555 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:39:54.5625 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:39:54.5748 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:39:54.6213 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:44:18.9543 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:44:18.9752 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:44:19.1537 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config
+2026-06-08 10:46:20.2134 Info Registered target NLog.Targets.FileTarget(Name=serverlog)
+2026-06-08 10:46:20.2295 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.1.3.5285. Product version: 6.1.3+7f18a90739535f5ddc71c48e0fa28c59e5ee8969. GlobalAssemblyCache: False
+2026-06-08 10:46:20.3733 Info Configuration initialized: TargetNames=serverlog, ConfigItems=19, AutoReload=true, FilePath=C:\Users\tnoma\Desktop\Team1_Pair_Programming\Team1_Pair_Program\Team1server\bin\Debug\net10.0\NLog.config

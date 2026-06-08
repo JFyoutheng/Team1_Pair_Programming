@@ -193,7 +193,10 @@ public class Program
                         {
                             ProductName = item.ProductName,
                             TotalCost = item.TotalCost,
-                            Quantity = item.ProductQuantity,
+
+
+                            /*コミット前に左辺のproductQuantity⇒Quantityに戻す*/
+                            ProductQuantity = item.ProductQuantity,
                             PurchaseDate = item.PurchaseDate
                         };
                         string json = JsonSerializer.Serialize(orderData);
