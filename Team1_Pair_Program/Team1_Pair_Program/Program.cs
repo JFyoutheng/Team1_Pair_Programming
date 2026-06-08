@@ -1,5 +1,4 @@
 ﻿using NLog;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 
@@ -43,18 +42,12 @@ public class Program
             if (mainSelectedIndex == 1)
             {
                 Console.Clear();
-
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8080/");
-                string jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                List<Product>? orderHistory = JsonSerializer.Deserialize<List<Product>>(jsonString, options);
-
-                if (orderHistory == null || orderHistory.Count == 0)
-                {
-                    Console.WriteLine("履歴はありません。\n何かキーを押すとメインメニューに戻ります。");
-                    Console.ReadKey(true);
-                    continue;
-                }
+                //if (orderHistory.Count == 0)
+                //{
+                //    Console.WriteLine("履歴はありません。\n何かキーを押すとメインメニューに戻ります。");
+                //    Console.ReadKey(true);
+                //    continue;
+                //}
                 string[] sortOptions = { "合計金額の降順 (低い順)", "日付順 (新しい順)" };
                 int sortSelectedIndex = 0;
                 key = ConsoleKey.NoName;
@@ -69,24 +62,24 @@ public class Program
 
 
                 // sortSelectedIndex が 0 なら金額降順(Order)、1 なら日付降順(OrderByDescending)
-                var sortedHistory = (sortSelectedIndex == 0)
-                    ? orderHistory.OrderBy(o => o.TotalCost).ToList()
-                    : orderHistory.OrderByDescending(o => o.PurchaseDate).ToList();
+                //var sortedHistory = (sortSelectedIndex == 0)
+                //    ? orderHistory.OrderBy(o => o.TotalCost).ToList()
+                //    : orderHistory.OrderByDescending(o => o.PurchaseDate).ToList();
 
                 //並び替えた履歴の表示
                 Console.Clear();
                 Console.WriteLine($"購入履歴一覧 【並び替え: {sortOptions[sortSelectedIndex]}】");
                 Console.WriteLine("--------------------------------------------");
 
-                foreach (var order in sortedHistory)
-                {
-                    // 日付は yyyy/MM/dd HH:mm:ss 形式で表示
-                    Console.WriteLine($" 商品名: {order.ProductName}");
-                    Console.WriteLine($" 個数: {order.ProductQuantity}");
-                    Console.WriteLine($"日付: {order.PurchaseDate:yyyy/MM/ddHH:mm:ss}");
-                    Console.WriteLine($"合計金額: {order.TotalCost:N0}円");
-                    Console.WriteLine("--------------------------------------------");
-                }
+                //foreach (var order in sortedHistory)
+                //{
+                //    // 日付は yyyy/MM/dd HH:mm:ss 形式で表示
+                //    Console.WriteLine($" 商品名: {order.ProductName}");
+                //    Console.WriteLine($" 個数: {order.ProductQuantity}");
+                //    Console.WriteLine($"日付: {order.PurchaseDate:yyyy/MM/ddHH:mm:ss}");
+                //    Console.WriteLine($"合計金額: {order.TotalCost:N0}円");
+                //    Console.WriteLine("--------------------------------------------");
+                //}
 
                 Console.WriteLine("\n何かキーを押すとメインメニューに戻ります。");
                 Console.ReadKey(true);
@@ -200,7 +193,7 @@ public class Program
                         {
                             ProductName = item.ProductName,
                             TotalCost = item.TotalCost,
-                            ProductQuantity = item.ProductQuantity,
+                            Quantity = item.ProductQuantity,
                             PurchaseDate = item.PurchaseDate
                         };
                         string json = JsonSerializer.Serialize(orderData);
@@ -226,6 +219,7 @@ public class Program
                     }
                     cart.Clear();
 
+                    logger.Info("売上データをPOST送信しました。");
                     Console.WriteLine("--------------------------------------------");
                     Console.WriteLine("何かキーを押すとメインメニューに戻ります。");
                     Console.ReadKey(true);

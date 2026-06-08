@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fukuyama\\Documents\\GitHub\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj": {}
+    "C:\\Users\\tnoma\\Desktop\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fukuyama\\Documents\\GitHub\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj": {
+    "C:\\Users\\tnoma\\Desktop\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fukuyama\\Documents\\GitHub\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj",
+        "projectUniqueName": "C:\\Users\\tnoma\\Desktop\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj",
         "projectName": "Team1_Pair_Program",
-        "projectPath": "C:\\Users\\fukuyama\\Documents\\GitHub\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj",
-        "packagesPath": "C:\\Users\\fukuyama\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fukuyama\\Documents\\GitHub\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\obj\\",
+        "projectPath": "C:\\Users\\tnoma\\Desktop\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\Team1_Pair_Program.csproj",
+        "packagesPath": "C:\\Users\\tnoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tnoma\\Desktop\\Team1_Pair_Programming\\Team1_Pair_Program\\Team1_Pair_Program\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\fukuyama\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tnoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
