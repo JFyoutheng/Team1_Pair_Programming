@@ -11,8 +11,11 @@
     class Program
     {
         private static readonly Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            logger.Info("アプリ起動");
+            LogManager.Flush();
+
             List<Products> salesList = new List<Products>();
 
             // 1. サーバーの待ち受け設定
@@ -64,15 +67,17 @@
                                 Console.WriteLine($"【変換成功】");
                                 Console.WriteLine($"商品名: {data.ProductName}");
                                 Console.WriteLine($"数量: {data.ProductQuantity}");
-                                Console.WriteLine($"金額: {data.TotalCost}"); // 「年齢」から「金額」に修正しました
+                                Console.WriteLine($"金額: {data.TotalCost}"); 
                             }
                         }
                         catch (JsonException)
                         {
+                           logger.Info("JSONの形式が正しくありません。");
+                            LogManager.Flush();
                             Console.WriteLine("JSONの形式が正しくありません。");
                         }
 
-                        Console.WriteLine($"[指示受信] 時刻: {DateTime.Now:HH:mm:ss}\n");
+                        logger.Info($"[指示受信] 時刻: {DateTime.Now:HH:mm:ss}\n");
 
                         // 4. 返事（JSONデータ）を返す準備
                         string jsonResponse = "{\"status\": \"success\", \"message\": \"機器1の制御に成功しました。\"}";
@@ -89,10 +94,14 @@
                     else if (request.HttpMethod == "GET")
                     {
                         // 💡 GETリクエストが来た場合の処理（必要であればここに書く）
-                        string jsonResponse = "{\"message\": \"GETリクエストを受け付けました。\"}";
-                        byte[] buffer = Encoding.UTF8.GetBytes(jsonResponse);
+                        logger.Info("GETリクエストを受信しました");
+                        Console.WriteLine("GETリクエストを受信しました");
+                        string JsonSalesList = JsonSerializer.Serialize(salesList);
+                        byte[] buffer = Encoding.UTF8.GetBytes(JsonSalesList);
+                        response.ContentType = "application/json";
+                        response.ContentLength64 = buffer.Length;
+                        await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
                         response.StatusCode = (int)HttpStatusCode.OK;
-                        response.OutputStream.Write(buffer, 0, buffer.Length);
                     }
                     else
                     {
@@ -102,12 +111,11 @@
                 }
                 catch (Exception ex)
                 {
+                    logger.Info($"リクエスト処理中にエラー: {ex.Message}");
                     Console.WriteLine($"リクエスト処理中にエラー: {ex.Message}");
                 }
                 finally
                 {
-                    // 💡 【超重要】どんなリクエスト（POST, GET, エラー）であっても、
-                    // 最後に必ず「この通信(response)」だけを確実に閉じる！
                     response.Close();
                 }
             }
@@ -116,7 +124,7 @@
         public class Products
         {
             public string ProductName { get; set; } = "";
-            public string ProductQuantity { get; set; } = "";
+            public int ProductQuantity { get; set; }
             public int TotalCost { get; set; }
             public DateTime PurchaseDate { get; set; }
         }
