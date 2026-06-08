@@ -55,6 +55,7 @@
                     if (request.HttpMethod == "POST")
                     {
                         // 送られてきた指示（JSON）を読み取る
+                        logger.Info($"[POST指示受信] 時刻: {DateTime.Now:HH:mm:ss}\n");
                         using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
                         string jsonString = reader.ReadToEnd();
 
@@ -63,6 +64,7 @@
                             Products? data = JsonSerializer.Deserialize<Products>(jsonString);
                             if (data != null)
                             {
+                                logger.Info($"[データ受け取り完了]: {DateTime.Now:HH:mm:ss}\n");
                                 salesList.Add(data);
                                 Console.WriteLine($"【変換成功】");
                                 Console.WriteLine($"商品名: {data.ProductName}");
@@ -72,12 +74,12 @@
                         }
                         catch (JsonException)
                         {
-                           logger.Info("JSONの形式が正しくありません。");
+                           logger.Warn("JSONの形式が正しくありません。");
                             LogManager.Flush();
                             Console.WriteLine("JSONの形式が正しくありません。");
                         }
 
-                        logger.Info($"[指示受信] 時刻: {DateTime.Now:HH:mm:ss}\n");
+
 
                         // 4. 返事（JSONデータ）を返す準備
                         string jsonResponse = "{\"status\": \"success\", \"message\": \"機器1の制御に成功しました。\"}";
@@ -94,7 +96,7 @@
                     else if (request.HttpMethod == "GET")
                     {
                         // 💡 GETリクエストが来た場合の処理（必要であればここに書く）
-                        logger.Info("GETリクエストを受信しました");
+                        logger.Info($"[GET指示受信] 時刻: {DateTime.Now:HH:mm:ss}\n");
                         Console.WriteLine("GETリクエストを受信しました");
                         string JsonSalesList = JsonSerializer.Serialize(salesList);
                         byte[] buffer = Encoding.UTF8.GetBytes(JsonSalesList);
@@ -102,6 +104,8 @@
                         response.ContentLength64 = buffer.Length;
                         await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
                         response.StatusCode = (int)HttpStatusCode.OK;
+                        Console.WriteLine("通信が完了しました");
+                        logger.Info($"[データ受け渡し完了]: {DateTime.Now:HH:mm:ss}\n");
                     }
                     else
                     {
@@ -111,7 +115,7 @@
                 }
                 catch (Exception ex)
                 {
-                    logger.Info($"リクエスト処理中にエラー: {ex.Message}");
+                    logger.Warn($"リクエスト処理中にエラー: {ex.Message}");
                     Console.WriteLine($"リクエスト処理中にエラー: {ex.Message}");
                 }
                 finally
