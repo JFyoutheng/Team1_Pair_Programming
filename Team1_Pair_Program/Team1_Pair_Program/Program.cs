@@ -1,4 +1,5 @@
 ﻿using NLog;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 using Team1_Pair_Program;
@@ -14,10 +15,10 @@ public class Program
         ];
     private static readonly HttpClient httpClient = new HttpClient();
 
-    public static List<Product> cart = [];
+    private static List<Product> cart = [];
+    private static List<Product>? orderHistory = null;
     static async Task Main()
     {
-        var cart = new List<Product>();
 
         while (true)
         {
@@ -41,11 +42,26 @@ public class Program
             if (mainSelectedIndex == 1)
             {
                 Console.Clear();
-
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8080/");
-                string jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                List<Product>? orderHistory = JsonSerializer.Deserialize<List<Product>>(jsonString, options);
+                logger.Info("サーバーへデータをGET送信中...");
+                try
+                {
+                    HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8080/");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+                        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                        orderHistory = JsonSerializer.Deserialize<List<Product>>(jsonString, options);
+                        logger.Info($"通信成功");
+                    }
+                    else
+                    {
+                        logger.Error($"サーバーがエラーを返しました: {(int)response.StatusCode} {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.Error($"送信エラー: {ex.Message}");
+                }
 
                 if (orderHistory == null || orderHistory.Count == 0)
                 {
